@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Future Earn | Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+background:
+linear-gradient(135deg,#141e30,#243b55);
+
+min-height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+overflow:hidden;
+padding:15px;
+position:relative;
+}
+
+/* BACKGROUND */
+
+body::before{
+
+content:'';
+
+position:absolute;
+
+width:260px;
+height:260px;
+
+background:#ffde59;
+
+border-radius:50%;
+
+top:-100px;
+left:-80px;
+
+filter:blur(120px);
+
+opacity:0.35;
+}
+
+body::after{
+
+content:'';
+
+position:absolute;
+
+width:260px;
+height:260px;
+
+background:#ff4d6d;
+
+border-radius:50%;
+
+bottom:-100px;
+right:-80px;
+
+filter:blur(120px);
+
+opacity:0.35;
+}
+
+/* CARD */
+
+.glass-card{
+
+position:relative;
+
+width:100%;
+max-width:400px;
+
+padding:35px 25px;
+
+border-radius:28px;
+
+background:rgba(255,255,255,0.08);
+
+backdrop-filter:blur(16px);
+
+border:1px solid rgba(255,255,255,0.15);
+
+box-shadow:
+0 10px 40px rgba(0,0,0,0.35),
+0 0 25px rgba(255,222,89,0.2);
+
+text-align:center;
+
+color:white;
+
+animation:cardShow 0.5s ease;
+}
+
+.glass-card h2{
+
+font-size:34px;
+font-weight:700;
+
+color:#ffde59;
+
+margin-bottom:8px;
+
+text-shadow:
+0 0 12px rgba(255,222,89,0.6);
+}
+
+.glass-card p{
+
+font-size:14px;
+
+opacity:0.8;
+
+margin-bottom:25px;
+}
+
+/* INPUT */
+
+.input-group{
+
+margin-bottom:16px;
+}
+
+input{
+
+width:100%;
+
+padding:14px 15px;
+
+border:none;
+
+outline:none;
+
+border-radius:14px;
+
+background:rgba(255,255,255,0.08);
+
+border:1px solid rgba(255,255,255,0.18);
+
+color:white;
+
+font-size:15px;
+
+transition:0.3s;
+}
+
+input::placeholder{
+
+color:rgba(255,255,255,0.6);
+}
+
+input:focus{
+
+border-color:#ffde59;
+
+background:rgba(255,255,255,0.14);
+
+box-shadow:
+0 0 12px rgba(255,222,89,0.3);
+}
+
+/* BUTTON */
+
+.btn-login{
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+border-radius:14px;
+
+background:
+linear-gradient(145deg,#ffde59,#ffd000);
+
+color:#1d2671;
+
+font-size:16px;
+font-weight:700;
+
+cursor:pointer;
+
+margin-top:8px;
+
+transition:0.3s;
+
+box-shadow:
+0 6px 0 #caa400,
+0 10px 18px rgba(255,222,89,0.25);
+}
+
+.btn-login:hover{
+
+transform:translateY(-2px);
+}
+
+.btn-login:active{
+
+transform:translateY(3px);
+
+box-shadow:
+0 2px 0 #caa400;
+}
+
+/* FOOTER */
+
+.footer-text{
+
+margin-top:18px;
+
+font-size:13px;
+}
+
+.footer-text a{
+
+color:#ffde59;
+
+text-decoration:none;
+
+font-weight:600;
+}
+
+/* POPUP */
+
+.popup-overlay{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100vw;
+height:100vh;
+
+display:none;
+
+justify-content:center;
+align-items:center;
+
+background:rgba(0,0,0,0.65);
+
+backdrop-filter:blur(6px);
+
+z-index:99999;
+
+padding:20px;
+}
+
+.popup{
+
+position:relative;
+
+width:320px;
+
+max-width:95%;
+
+padding:30px 22px;
+
+border-radius:28px;
+
+background:
+linear-gradient(
+145deg,
+#111827,
+#0f172a
+);
+
+border:
+2px solid #ffde59;
+
+text-align:center;
+
+box-shadow:
+0 0 25px rgba(255,222,89,.35);
+
+animation:popupShow .35s ease;
+
+/* IMPORTANT */
+
+margin:auto;
+
+left:0;
+right:0;
+
+top:0;
+bottom:0;
+
+}
+
+.popup-icon{
+
+font-size:58px;
+
+margin-bottom:10px;
+}
+
+.success{
+
+color:#00ff99;
+
+text-shadow:
+0 0 10px #00ff99;
+}
+
+.error{
+
+color:#ff4d6d;
+
+text-shadow:
+0 0 10px #ff4d6d;
+}
+
+.popup h3{
+
+font-size:26px;
+
+color:#ffde59;
+
+margin-bottom:8px;
+}
+
+.popup p{
+
+font-size:15px;
+
+color:white;
+
+margin-bottom:20px;
+}
+
+.popup button{
+
+width:100%;
+
+padding:12px;
+
+border:none;
+
+border-radius:12px;
+
+background:#ffde59;
+
+color:#111;
+
+font-size:15px;
+font-weight:700;
+
+cursor:pointer;
+}
+
+/* ANIMATION */
+@keyframes popupShow{
+
+0%{
+
+transform:
+scale(.6)
+translateY(30px);
+
+opacity:0;
+
+}
+
+100%{
+
+transform:
+scale(1)
+translateY(0);
+
+opacity:1;
+
+}
+
+}
+
+/* MOBILE */
+
+@media screen and (max-width:600px){
+
+.glass-card{
+
+padding:28px 20px;
+
+border-radius:24px;
+}
+
+.glass-card h2{
+
+font-size:28px;
+}
+
+.glass-card p{
+
+font-size:13px;
+}
+
+input{
+
+padding:13px;
+
+font-size:14px;
+}
+
+.btn-login{
+
+padding:13px;
+
+font-size:15px;
+}
+
+.popup{
+
+max-width:290px;
+}
+
+.popup h3{
+
+font-size:22px;
+}
+
+.popup p{
+
+font-size:14px;
+}
+
+.popup-icon{
+
+font-size:52px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="glass-card">
+
+<h2>WELCOME BACK</h2>
+
+<p>Login to continue your journey.</p>
+
+<div class="input-group">
+
+<input type="email"
+id="loginEmail"
+placeholder="Email Address">
+
+</div>
+
+<div class="input-group">
+
+<input type="password"
+id="loginPassword"
+placeholder="Password">
+
+</div>
+
+<button class="btn-login"
+id="loginBtn">
+
+Login Now
+
+</button>
+
+<div class="footer-text">
+
+Don't have an account ?
+
+<a href="register.html">
+
+Register
+
+</a>
+
+</div>
+
+</div>
+
+<!-- POPUP -->
+
+<div class="popup-overlay"
+id="popupOverlay">
+
+<div class="popup">
+
+<div class="popup-icon"
+id="popupIcon">
+
+✔
+
+</div>
+
+<h3 id="popupTitle">
+
+Success
+
+</h3>
+
+<p id="popupMessage">
+
+Login Successful
+
+</p>
+
+<button onclick="closePopup()">
+
+OK
+
+</button>
+
+</div>
+
+</div>
+
+<!-- SOUND -->
+
+<audio id="successSound">
+
+<source src="https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3" type="audio/mpeg">
+
+</audio>
+
+<audio id="errorSound">
+
+<source src="https://assets.mixkit.co/active_storage/sfx/2955/2955-preview.mp3" type="audio/mpeg">
+
+</audio>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+
+import {
+getAuth,
+signInWithEmailAndPassword
+}
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyD3aPz3uVF7acGZlxsozwrxB61hWsjW784",
+
+authDomain: "future-earn-20129.firebaseapp.com",
+
+projectId: "future-earn-20129",
+
+storageBucket: "future-earn-20129.firebasestorage.app",
+
+messagingSenderId: "64268879881",
+
+appId: "1:64268879881:web:07f81b5a0c82b9fce7d0d8"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+/* POPUP */
+
+window.showPopup = function(type,message){
+
+const overlay =
+document.getElementById("popupOverlay");
+
+const icon =
+document.getElementById("popupIcon");
+
+const title =
+document.getElementById("popupTitle");
+
+const msg =
+document.getElementById("popupMessage");
+
+overlay.style.display = "flex";
+
+msg.innerText = message;
+
+if(type === "success"){
+
+icon.innerHTML = "✔";
+
+icon.className = "popup-icon success";
+
+title.innerText = "Success";
+
+document.getElementById(
+"successSound"
+).play();
+
+}else{
+
+icon.innerHTML = "✖";
+
+icon.className = "popup-icon error";
+
+title.innerText = "Error";
+
+document.getElementById(
+"errorSound"
+).play();
+
+}
+
+}
+
+window.closePopup = function(){
+
+document.getElementById(
+"popupOverlay"
+).style.display = "none";
+
+}
+
+/* LOGIN */
+
+document.getElementById(
+"loginBtn"
+).onclick = async () => {
+
+const email =
+document.getElementById(
+"loginEmail"
+).value;
+
+const password =
+document.getElementById(
+"loginPassword"
+).value;
+
+if(!email || !password){
+
+showPopup(
+"error",
+"Please enter email & password!"
+);
+
+return;
+}
+
+try{
+
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+showPopup(
+"success",
+"Login Successful!"
+);
+
+setTimeout(()=>{
+
+window.location.href =
+"dashboard.html";
+
+},2000);
+
+}
+
+catch(error){
+
+showPopup(
+"error",
+error.message
+);
+
+}
+
+};
+
+</script>
+
+</body>
+</html>
