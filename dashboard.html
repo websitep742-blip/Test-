@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Future Earn Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+min-height:100vh;
+color:white;
+overflow-x:hidden;
+
+background:url("ocean-bg.jpg") center center no-repeat fixed !important;
+background-size:cover !important;
+}
+/* HEADER */
+
+.header{
+
+padding:30px 20px;
+
+text-align:center;
+
+background:
+rgba(255,255,255,0.03);
+
+
+
+border-bottom:
+1px solid rgba(255,255,255,0.08);
+}
+
+.header h2{
+
+font-size:42px;
+
+font-weight:800;
+
+margin-top:-30px !important;
+
+margin-bottom:5px !important;
+  text-shadow:0 0 10px rgba(255,215,0,.4);
+
+color:#ffd84d;
+}
+
+.header p{
+
+font-size:14px;
+
+color:#aaa;
+
+margin-top:5px;
+  
+
+position:relative;
+
+top
+}
+
+.status-badge{
+
+display:inline-block;
+
+padding:8px 18px;
+
+border-radius:30px;
+
+font-size:13px;
+
+font-weight:600;
+}
+
+.active{
+background:rgba(0,255,100,.15);
+border:2px solid #00ff66;
+
+box-shadow:
+0 0 20px #00ff66,
+0 0 40px rgba(0,255,100,.3);
+
+color:#00ff66;
+}
+
+.pending{
+
+background:
+rgba(255,0,0,0.1);
+
+border:
+1px solid #ff4d6d;
+
+color:#ff4d6d;
+}
+
+/* CONTAINER */
+
+.container{
+
+padding:20px;
+
+max-width:520px;
+
+margin:auto;
+}
+
+/* BONUS CARD */
+
+.bonus-card{
+
+background:rgba(5,15,35,.35)!important;
+border:1px solid rgba(255,255,255,.18)!important;
+border-radius:25px;
+
+padding:30px;
+  margin-top:25px;
+
+text-align:center;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.3);
+}
+
+.bonus-card h3{
+
+font-size:22px;
+
+color:#ffde59;
+}
+
+.bonus-card p{
+
+font-size:13px;
+
+color:#aaa;
+
+margin-top:6px;
+}
+
+.btn-bonus{
+
+width:100%;
+
+padding:14px;
+
+margin-top:18px;
+
+border:none;
+
+border-radius:18px;
+background:linear-gradient(
+180deg,
+#ffe97a,
+#ffbe00
+);
+
+color:#111;
+
+font-size:18px;
+
+font-weight:800;
+
+cursor:pointer;
+
+transition:0.3s;
+  box-shadow:
+0 0 25px rgba(255,215,0,.4);
+
+border-radius:25px;
+}
+
+.btn-bonus:disabled{
+
+opacity:0.5;
+
+cursor:not-allowed;
+}
+
+/* GRID */
+
+.card-grid{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:15px;
+
+margin-top:20px;
+}
+
+.card{
+
+background:
+rgba(255,255,255,0.05);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+border-radius:22px;
+
+padding:22px;
+
+text-align:center;
+}
+
+.card h3{
+
+font-size:12px;
+
+color:#999;
+
+margin-bottom:8px;
+}
+
+.card p{
+
+font-size:24px;
+
+font-weight:700;
+
+color:#ffde59;
+}
+
+/* REFERRAL */
+
+.referral-box{
+
+margin-top:20px;
+
+background:
+rgba(255,255,255,0.05);
+
+border:
+1px dashed rgba(255,255,255,0.15);
+
+padding:20px;
+
+border-radius:22px;
+
+text-align:center;
+}
+
+.referral-box p{
+
+font-size:13px;
+
+color:#aaa;
+}
+
+#copyBtn{
+
+margin-top:12px;
+
+padding:13px 18px;
+
+border:none;
+
+border-radius:16px;
+
+background:
+linear-gradient(145deg,#ffde59,#ffd000);
+
+color:#111;
+
+font-size:15px;
+
+font-weight:700;
+
+cursor:pointer;
+}
+
+/* BUTTONS */
+
+.menu-btn{
+
+width:100%;
+
+padding:14px;
+
+margin-top:12px;
+
+border:none;
+
+border-radius:18px;
+
+background:
+rgba(255,255,255,0.05);
+
+border:
+1px solid rgba(255,255,255,0.08);
+
+color:white;
+
+font-size:15px;
+
+font-weight:600;
+
+cursor:pointer;
+}
+
+.logout-btn{
+
+width:100%;
+
+padding:14px;
+
+margin-top:25px;
+
+border:none;
+
+border-radius:18px;
+
+background:
+rgba(255,0,0,0.1);
+
+border:
+1px solid #ff4d6d;
+
+color:#ff4d6d;
+
+font-size:15px;
+
+font-weight:700;
+
+cursor:pointer;
+}
+
+/* POPUP */
+
+.custom-popup-overlay{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:100%;
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+background:
+rgba(0,0,0,0.7);
+
+backdrop-filter:blur(6px);
+
+z-index:99999;
+
+padding:15px;
+}
+
+.custom-popup{
+
+width:100%;
+max-width:320px;
+
+padding:30px 22px;
+
+border-radius:28px;
+
+background:
+linear-gradient(145deg,#111,#1f1f1f);
+
+border:2px solid #ffde59;
+
+text-align:center;
+
+animation:popupShow 0.35s ease;
+}
+
+.popup-icon{
+
+font-size:62px;
+
+margin-bottom:12px;
+}
+
+.popup-icon.success{
+
+color:#00ff99;
+}
+
+.popup-icon.error{
+
+color:#ff4d6d;
+}
+
+.custom-popup h3{
+
+font-size:28px;
+
+color:#ffde59;
+
+margin-bottom:8px;
+}
+
+.custom-popup p{
+
+font-size:15px;
+
+line-height:22px;
+
+color:#fff;
+
+margin-bottom:22px;
+}
+
+.custom-popup button{
+
+width:100%;
+
+padding:13px;
+
+border:none;
+
+border-radius:16px;
+
+background:
+linear-gradient(145deg,#ffde59,#ffd000);
+
+color:#111;
+
+font-size:15px;
+
+font-weight:700;
+
+cursor:pointer;
+}
+
+@keyframes popupShow{
+
+0%{
+
+transform:scale(0.6);
+opacity:0;
+}
+
+100%{
+
+transform:scale(1);
+opacity:1;
+}
+
+}
+  .top-announcement{
+position:relative;
+margin:12px 15px;
+
+background:rgba(0,0,0,.55);
+
+border:1.5px solid rgba(255,215,0,.4);
+
+border-radius:40px;
+
+padding:12px 20px;
+
+overflow:hidden;
+white-space:nowrap;
+
+backdrop-filter:blur(10px);
+
+box-shadow:
+0 0 15px rgba(255,215,0,.15),
+0 4px 20px rgba(0,0,0,.35);
+}
+  
+  
+.top-announcement span{
+display:inline-block;
+
+padding-left:100%;
+
+animation:tickerMove 22s linear infinite;
+
+font-size:18px;
+font-weight:700;
+
+color:#ffd54a;
+
+text-shadow:
+0 0 8px rgba(255,215,0,.3);
+}
+
+@keyframes scrollText{
+0%{
+transform:translateX(0);
+}
+100%{
+transform:translateX(-100%);
+}
+}.join-ticker{
+margin-bottom:20px;
+
+background:rgba(5,15,35,.65);
+
+backdrop-filter:blur(12px);
+-webkit-backdrop-filter:blur(12px);
+
+border:1px solid rgba(255,215,0,.20);
+
+border-radius:50px;
+
+padding:16px 20px;
+
+font-weight:700;
+
+color:#ffcc33;
+
+overflow:hidden;
+white-space:nowrap;
+
+box-shadow:
+0 0 20px rgba(255,215,0,.08),
+0 8px 25px rgba(0,0,0,.35);
+}
+
+.join-ticker span{
+display:inline-block;
+padding-left:100%;
+animation:tickerMove 25s linear infinite;
+}
+
+@keyframes tickerMove{
+0%{
+transform:translateX(0);
+}
+100%{
+transform:translateX(-100%);
+}
+}
+  /* AQUARIUM BACKGROUND */
+
+.aquarium-bg{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+overflow:hidden;
+z-index:-1;
+background:transparent;
+}
+/* WAVES */
+
+.wave{
+position:absolute;
+bottom:-80px;
+width:200%;
+height:220px;
+background:
+rgba(255,255,255,0.08);
+border-radius:45%;
+}
+
+.wave1{
+animation:waveMove 18s linear infinite;
+}
+
+.wave2{
+opacity:0.4;
+animation:waveMove 25s linear infinite reverse;
+}
+
+@keyframes waveMove{
+0%{
+transform:translateX(0);
+}
+100%{
+transform:translateX(-50%);
+}
+}
+
+/* BUBBLES */
+
+.bubble{
+position:absolute;
+bottom:-50px;
+border-radius:50%;
+background:rgba(255,255,255,0.45);
+border:1px solid rgba(255,255,255,0.8);
+animation:bubbleRise linear infinite;
+}
+
+.b1{
+width:20px;
+height:20px;
+left:10%;
+animation-duration:8s;
+}
+
+.b2{
+width:12px;
+height:12px;
+left:30%;
+animation-duration:12s;
+}
+
+.b3{
+width:25px;
+height:25px;
+left:50%;
+animation-duration:10s;
+}
+
+.b4{
+width:15px;
+height:15px;
+left:70%;
+animation-duration:14s;
+}
+
+.b5{
+width:22px;
+height:22px;
+left:90%;
+animation-duration:11s;
+}
+
+@keyframes bubbleRise{
+0%{
+transform:translateY(0);
+opacity:0;
+}
+20%{
+opacity:1;
+}
+100%{
+transform:translateY(-120vh);
+opacity:0;
+}
+}
+
+/* FISH */
+.ocean-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,20,40,.15);
+z-index:-1;
+}
+
+.fish{
+position:fixed;
+width:80px;
+z-index:2;
+}
+
+.fish1{
+top:20%;
+left:-100px;
+animation:swim1 18s linear infinite;
+}
+
+.fish2{
+top:45%;
+left:-120px;
+animation:swim1 25s linear infinite;
+}
+
+.fish3{
+top:70%;
+left:-100px;
+animation:swim1 22s linear infinite;
+}
+
+@keyframes swim1{
+from{left:-120px;}
+to{left:110%;}
+}
+
+.octopus{
+position:fixed;
+bottom:10px;
+right:10px;
+width:120px;
+opacity:.9;
+z-index:1;
+}
+
+/* GLASSMORPHISM */
+
+.card,
+.bonus-card,
+.referral-box,
+.menu-btn{
+background:rgba(5,15,35,.25)!important;
+backdrop-filter:blur(6px);
+-webkit-backdrop-filter:blur(6px);
+
+border:1px solid rgba(255,255,255,.12)!important;
+
+box-shadow:
+0 8px 25px rgba(0,0,0,.35);
+
+border-radius:28px;
+}
+  .header{
+background:transparent !important;
+border:none !important;
+box-shadow:none !important;
+backdrop-filter:none !important;
+}
+  .light-ray{
+position:absolute;
+top:-20%;
+width:120px;
+height:140%;
+background:rgba(255,255,255,0.05);
+transform:rotate(20deg);
+filter:blur(10px);
+animation:rayMove 8s ease-in-out infinite alternate;
+}
+
+.ray1{left:10%;}
+.ray2{left:45%;}
+.ray3{left:75%;}
+
+@keyframes rayMove{
+from{transform:rotate(20deg) translateY(0);}
+to{transform:rotate(25deg) translateY(40px);}
+}
+  .particles{
+position:absolute;
+width:100%;
+height:100%;
+background-image:
+radial-gradient(circle,rgba(255,255,255,.15) 1px,transparent 1px);
+background-size:50px 50px;
+animation:particleMove 25s linear infinite;
+}
+
+@keyframes particleMove{
+from{transform:translateY(0);}
+to{transform:translateY(-200px);}
+}
+.brand-logo{
+font-size:28px;
+font-weight:900;
+color:#4fc3ff;
+text-shadow:
+0 0 10px #4fc3ff,
+0 0 25px #4fc3ff;
+margin-bottom:10px;
+}
+  body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,20,40,0.12);
+z-index:-1;
+}
+  .logo-container{
+    text-align:center;
+    margin:5px 0;
+    margin-bottom:-20px !important;
+}
+
+.future-logo{
+    width:240px;
+    height:auto;
+    display:block;
+    margin:auto;
+
+    filter:
+drop-shadow(0 0 15px #00bfff)
+drop-shadow(0 0 35px #00bfff);
+
+
+    animation:logoFloat 4s ease-in-out infinite;
+}
+@keyframes logoFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-8px);
+    }
+}
+</style>
+</head>
+<body>
+  <div class="aquarium-bg">
+
+<div class="particles"></div>
+
+<div class="light-ray ray1"></div>
+<div class="light-ray ray2"></div>
+<div class="light-ray ray3"></div>
+
+<div class="bubble b1"></div>
+<div class="bubble b2"></div>
+<div class="bubble b3"></div>
+<div class="bubble b4"></div>
+<div class="bubble b5"></div>
+
+<img src="fish1.png" class="fish fish1">
+<img src="fish2.png" class="fish fish2">
+<img src="fish3.png" class="fish fish3">
+    
+    <img src="octopus.png" class="octopus">
+
+<div class="wave wave1"></div>
+<div class="wave wave2"></div>
+
+</div>
+  <div class="particles"></div>
+  
+  
+  <div class="top-announcement">
+<span>
+🔥 NEW ₹100 PLAN LAUNCHED 🔥 JOIN TODAY & START EARNING 💸 | 👑 PREMIUM ₹199 PLAN AVAILABLE | 🎁 DAILY BONUS | 🚀 LIMITED TIME OFFER
+</span>
+</div>
+
+<div class="header">
+
+<span id="userStatusBadge"
+class="status-badge pending">
+
+Checking...
+
+</span>
+  <div class="logo-container">
+    <img src="86940.png" alt="Future Earning Logo" class="future-logo">
+</div>
+
+<h2 id="userName">
+
+---
+
+</h2>
+  
+
+<p>
+
+Referral ID :
+<span id="myID"
+style="color:#ffde59;">
+
+--
+
+</span>
+
+</p>
+
+</div>
+  
+
+<div class="container">
+  
+  <div class="join-ticker">
+  <span id="joinTicker">
+    🎉 Loading latest joins...
+  </span>
+</div>
+  
+
+<div class="bonus-card">
+
+<h3>
+
+🎁 Daily Cashback
+
+</h3>
+
+<p>
+
+Claim your reward every 24 hours
+
+</p>
+
+<button id="claimBonusBtn"
+class="btn-bonus"
+disabled>
+
+Claim Daily Bonus
+
+</button>
+
+<p id="bonusMsg"
+style="margin-top:10px;color:#ffde59;font-size:12px;">
+
+</p>
+
+</div>
+
+<div class="card-grid">
+
+<div class="card">
+
+<h3>Total Wallet</h3>
+
+<p>
+
+₹<span id="wallet">0</span>
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Pairs</h3>
+
+<p id="pairs">
+
+0
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Left Team</h3>
+
+<p id="leftTeam">
+
+0
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h3>Right Team</h3>
+
+<p id="rightTeam">
+
+0
+
+</p>
+
+</div>
+
+</div>
+
+<div class="referral-box">
+
+<p>
+
+Your Referral Code
+
+</p>
+
+<button id="copyBtn">
+
+💸 COPY CODE 💸
+
+</button>
+
+</div>
+
+<button class="menu-btn"
+onclick="window.location.href='buy.html'">
+🛒 BUY PLAN
+</button>
+  
+<button class="menu-btn"
+onclick="window.location.href='profile.html'">
+👤 ACCOUNT INFO
+</button>
+
+<button class="menu-btn"
+onclick="window.location.href='tree.html'">
+🌲 View My Team Tree
+</button>
+
+<button class="menu-btn"
+onclick="window.location.href='withdraw.html'">
+💰 WITHDRAWAL
+</button>
+
+
+<button class="menu-btn"
+onclick="window.location.href='history.html'">
+📜 HISTORY DETAILS
+</button>
+  
+  
+<button class="menu-btn"
+onclick="window.location.href='Leaderboard.html'">
+👬 LEADERBOARD
+</button>
+
+
+<button class="menu-btn"
+onclick="window.location.href='Terms.html'">
+📞 TERMS & SUPPORT
+</button>
+  
+  <button class="menu-btn"
+onclick="window.location.href='Details Page.html'">
+🗼 ABOUT DETAILS
+</button>
+
+<button id="logoutBtn"
+class="logout-btn">
+
+🚪 LOGOUT ACCOUNT
+
+</button>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+
+import {
+getAuth,
+onAuthStateChanged,
+signOut
+}
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+
+import {
+getFirestore,
+doc,
+onSnapshot,
+updateDoc,
+increment,
+collection,
+query,
+orderBy,
+limit
+}
+from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+/* FIREBASE */
+
+const firebaseConfig = {
+
+apiKey:"AIzaSyD3aPz3uVF7acGZlxsozwrxB61hWsjW784",
+
+authDomain:"future-earn-20129.firebaseapp.com",
+
+projectId:"future-earn-20129",
+
+storageBucket:"future-earn-20129.firebasestorage.app",
+
+messagingSenderId:"64268879881",
+
+appId:"1:64268879881:web:07f81b5a0c82b9fce7d0d8"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const auth =
+getAuth(app);
+
+const db =
+getFirestore(app);
+
+let currentUserData = null;
+
+/* POPUP */
+
+function showPopup(type,message){
+
+const popup =
+document.createElement("div");
+
+popup.className =
+"custom-popup-overlay";
+
+popup.innerHTML = `
+
+<div class="custom-popup">
+
+<div class="popup-icon ${type}">
+
+${type === "success" ? "✔" : "✖"}
+
+</div>
+
+<h3>
+
+${type === "success"
+? "Success"
+: "Error"}
+
+</h3>
+
+<p>${message}</p>
+
+<button id="closePopupBtn">
+
+OK
+
+</button>
+
+</div>
+
+`;
+
+document.body.appendChild(popup);
+
+document.getElementById(
+"closePopupBtn"
+).onclick = ()=>{
+
+popup.remove();
+
+};
+
+}
+
+/* TIMER */
+
+function startBonusTimer(seconds){
+
+const bonusBtn =
+document.getElementById(
+"claimBonusBtn"
+);
+
+const bonusMsg =
+document.getElementById(
+"bonusMsg"
+);
+
+bonusBtn.disabled = true;
+
+const timer =
+setInterval(()=>{
+
+let h =
+Math.floor(seconds / 3600);
+
+let m =
+Math.floor((seconds % 3600)/60);
+
+let s =
+seconds % 60;
+
+bonusMsg.innerText =
+`Next Bonus In ${h}h ${m}m ${s}s`;
+
+seconds--;
+
+if(seconds < 0){
+
+clearInterval(timer);
+
+bonusBtn.disabled = false;
+
+bonusMsg.innerText =
+"You can claim bonus now!";
+
+}
+
+},1000);
+
+}
+
+/* USER */
+
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+
+const userRef =
+doc(db,"users",user.uid);
+
+onSnapshot(userRef,(snap)=>{
+
+if(snap.exists()){
+
+const data =
+snap.data();
+
+currentUserData = data;
+
+document.getElementById(
+"userName"
+).innerText =
+data.fullName;
+
+document.getElementById(
+"wallet"
+).innerText =
+data.wallet || 0;
+
+document.getElementById(
+"myID"
+).innerText =
+data.referralCode;
+
+document.getElementById(
+"pairs"
+).innerText =
+data.pairsMatched || 0;
+
+document.getElementById(
+"leftTeam"
+).innerText =
+data.leftCount || 0;
+
+document.getElementById(
+"rightTeam"
+).innerText =
+data.rightCount || 0;
+
+const badge =
+document.getElementById(
+"userStatusBadge"
+);
+
+badge.innerText =
+data.status.toUpperCase();
+
+badge.className =
+`status-badge ${
+data.status === "active"
+? "active"
+: "pending"
+}`;
+
+const bonusBtn =
+document.getElementById(
+"claimBonusBtn"
+);
+
+const today =
+new Date().toDateString();
+
+if(
+data.status === "active"
+&&
+data.lastBonusDate !== today
+){
+
+bonusBtn.disabled = false;
+
+document.getElementById(
+"bonusMsg"
+).innerText =
+"You have 1 pending reward!";
+
+}else{
+
+bonusBtn.disabled = true;
+
+startBonusTimer(86400);
+
+}
+
+}
+
+});
+
+}else{
+
+window.location.href =
+"index.html";
+
+}
+
+});
+  /* LIVE JOIN TICKER */
+
+const latestQuery = query(
+collection(db,"users"),
+orderBy("createdAt","desc"),
+limit(5)
+);
+
+onSnapshot(latestQuery,(snap)=>{
+
+let text = "";
+
+snap.forEach((doc)=>{
+
+const u = doc.data();
+
+text += `🎉 ${u.fullName} joined ₹${u.plan} Plan • `;
+
+});
+
+document.getElementById(
+"joinTicker"
+).innerText = text;
+
+});
+
+/* BONUS CLAIM */
+
+document.getElementById(
+"claimBonusBtn"
+).onclick = async ()=>{
+
+if(!currentUserData) return;
+
+const userRef =
+doc(
+db,
+"users",
+auth.currentUser.uid
+);
+
+const today =
+new Date().toDateString();
+
+try{
+
+await updateDoc(userRef,{
+
+wallet:increment(2),
+
+lastBonusDate:today
+
+});
+
+showPopup(
+"success",
+"₹2 Daily Bonus Added Successfully!"
+);
+
+startBonusTimer(86400);
+
+}catch(e){
+
+showPopup(
+"error",
+"Bonus Claim Failed!"
+);
+
+}
+
+};
+
+/* COPY CODE */
+
+document.getElementById(
+"copyBtn"
+).onclick = ()=>{
+
+const code =
+document.getElementById(
+"myID"
+).innerText;
+
+navigator.clipboard.writeText(code);
+
+showPopup(
+"success",
+"Referral Code Copied!"
+);
+
+};
+
+/* LOGOUT */
+
+document.getElementById(
+"logoutBtn"
+).onclick = ()=>{
+
+signOut(auth);
+
+};
+
+</script>
+  
+</body>
+</html>
